@@ -1,0 +1,24 @@
+name: Terraform Pipeline
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      VAULT_TOKEN: ${{ secrets.VAULT_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+
+      
+      # Runs a single command using the runners shell
+      - name: Init
+        run: |
+          terraform init 
+
+      - name: Apply
+        run:
+          terraform apply -auto-approve
