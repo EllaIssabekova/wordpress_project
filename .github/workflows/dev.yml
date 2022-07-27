@@ -10,15 +10,31 @@ jobs:
     runs-on: ubuntu-latest
     env:
       VAULT_TOKEN: ${{ secrets.VAULT_TOKEN }}
+      GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}
+      GKE_REGION: ${{ secrets.GKE_REGION }}
     steps:
       - uses: actions/checkout@v3
 
-      
-      # Runs a single command using the runners shell
-      - name: Init
-        run: |
-          terraform init 
+      - id: google-auth
+        name: Authentication to Google Cloud services with Workload Identity Federation
+        uses: google-github-actions/auth@v0
+        with:
+            credentials_json: '${{ secrets.SERVICE_ACCOUNT }}'
 
+      # Setup gcloud CLI
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+
+      # Get the GKE credentials so we can deploy to the cluster
+      - run: |-
+          gcloud container clusters get-credentials "$GKE_CLUSTER" --region "$GKE_REGION"
+   
+      - name: Configure backend
+        run: |
+          bash setenv.sh  envs/dev.tfvars
+      - name: Terraform Init 
+        run: |
+          terraform init
       - name: Apply
         run:
-          terraform apply -auto-approve
+          terraform apply -var-file envs/dev.tfvars --auto-approve
