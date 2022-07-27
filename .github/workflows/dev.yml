@@ -37,4 +37,4 @@ jobs:
           terraform init
       - name: Apply
         run:
-          terraform apply -var-file envs/dev.tfvars --auto-approve
+          terraform destroy -var-file envs/dev.tfvars --auto-approve
