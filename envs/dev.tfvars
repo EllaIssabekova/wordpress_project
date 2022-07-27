@@ -27,9 +27,9 @@ app_memory_limit = "700Mi"
 app_cpu_request = "300m"
 app_memory_request = "512Mi"
           ##################### 53 #############################
-google_domain_name = "fiefdomain.com"
+google_domain_name = "awsdomain.org"
           ###########\########### pvc ##################################
-project_id = "fldysuflrnbjibrc"
+project_id = "enhuqehhvplrhjva"
           ###### db_pvc #######
 db_zone = "us-central1-b"
 db_volume_size_gb = 5
