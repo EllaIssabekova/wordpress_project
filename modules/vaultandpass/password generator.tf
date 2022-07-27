@@ -5,6 +5,7 @@ locals {
 
 provider "vault" {
     address = "https://vault.${var.google_domain_name}"
+    skip_tls_verify = true
 }
 
 resource "random_password" "random" {
