@@ -1,0 +1,54 @@
+namespace          = "wordpress"
+          ################### images ###########################
+          ###### db ###########
+db_deployment_name    = "mysql"
+db_replicaCount = "1"
+db_registry = "docker.io"
+db_repository = "mysql"
+db_tag = "5.7"
+db_port = "3306"
+db_ingress_enabled    = true
+db_inhelm_pvc_enabled = true
+db_cpu_limit = "400m"
+db_memory_limit = "750Mi"
+db_cpu_request = "300m"
+db_memory_request = "512Mi"
+          ###### app ############
+app_deployment_name = "threewordpress"
+app_replicaCount = "1"
+app_registry = "docker.io"
+app_repository = "wordpress"
+app_tag = "6.0-php7.4-apache"
+app_port               = "80"
+app_ingress_enabled    = true
+app_inhelm_pvc_enabled  = true
+app_cpu_limit = "400m"
+app_memory_limit = "700Mi"
+app_cpu_request = "300m"
+app_memory_request = "512Mi"
+          ##################### 53 #############################
+google_domain_name = "fiefdomain.com"
+          ###########\########### pvc ##################################
+project_id = "fldysuflrnbjibrc"
+          ###### db_pvc #######
+db_zone = "us-central1-b"
+db_volume_size_gb = 5
+db_labels = {
+    project     = "wordpress",
+    environment = "wordpress"
+  }
+           ###### app_pvc ########
+app_zone = "us-central1-c"
+app_volume_size_gb = 5
+app_labels = {
+    project     = "wordpress",
+    environment = "wordpress"
+  }
+          ############################# wp/db config #####################
+do_u_want_ur_own_password = false
+do_u_want_ur_own_root_password = false
+db_name = "mysql"
+db_host_name = "mysql"
+db_user_password = "password"
+user = "user"
+db_root_password = "password"

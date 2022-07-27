@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wpconfig
+data:
+  DB_USER_NAME: {{ .Values.dbconfig.dbuser}}
+  WP_HOME: {{ .Values.dbconfig.dbdomain }}
+  DB_HOST: {{ .Values.dbconfig.dbhost }}
+  DB_NAME: {{ .Values.dbconfig.dbname }}
